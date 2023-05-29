@@ -1,0 +1,21 @@
+<div>
+    <h2>Compras: </h2>
+    <div>
+        <label for="filter">Filtrar resultados:</label>
+        <input name="filter" id="filter" type="text" ng-model="filterName">
+    </div>
+    <table>
+        <thead>
+            <th ng-click="doSort('product')">Produto</th>
+            <th ng-click="doSort('price')">Preço</th>
+            <th ng-click="doSort('date')">Data Compra</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in orders | orderBy: 'date' | filter: filterName | orderBy:sortBy:reverse">
+                <td>{{item.product}}</td>
+                <td>{{item.price | currency: 'R$'}}</td>
+                <td>{{item.date | date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>   
+    </table>
+</div>

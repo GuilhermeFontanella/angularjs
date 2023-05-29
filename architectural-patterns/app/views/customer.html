@@ -1,0 +1,47 @@
+<div>
+    <span>
+        Name:
+    </span>
+    <input type="text" ng-model="name">
+    <label for="checkbox">Esconder div</label>
+    <input name="checkbox" id="checkbox" type="checkbox" ng-model="isHidden">
+    <br>
+</div>
+<div>
+    <ul>
+        <li ng-repeat="item in customers">nome: {{ item.name }}, idade: {{item.age}}</li>
+    </ul>
+</div>
+
+<div>
+    <div>
+        <label for="filter">Filtrar resultados:</label>
+        <input name="filter" id="filter" type="text" ng-model="filterName">
+    </div>
+    <table>
+        <thead>
+            <th ng-click="doSort('name')">Nome</th>
+            <th ng-click="doSort('age')">Idade</th>
+            <th ng-click="doSort('accountBalance')">Balance</th>
+            <th ng-click="doSort('birthDate')">Nascimento</th>
+            <th>&nbsp;</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in customers | orderBy: 'age' | filter: filterName | orderBy:sortBy:reverse">
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.accountBalance | currency: 'R$'}}</td>
+                <td>{{item.birthDate | date: 'dd/MM/yyyy'}}</td>
+                <td><a href="/#!/orders/{{item.id}}">Visualizar Compras</a></td>
+            </tr>
+        </tbody>   
+            
+        
+        
+        
+    </table>
+</div>
+<div>
+    <button ng-click="name = 'Mudou'">Change Name</button>
+    <span style="background-color: red;" ng-hide="isHidden" ng-bind="name"></span>
+</div>
